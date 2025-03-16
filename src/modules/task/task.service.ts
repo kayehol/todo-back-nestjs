@@ -13,11 +13,7 @@ export class TaskService {
   ) { }
 
   async findAll(): Promise<Task[]> {
-    return await this.taskRepository.find({
-      relations: {
-        user: false,
-      }
-    });
+    return await this.taskRepository.find();
   }
 
   async findOne(id: number): Promise<Task | null> {

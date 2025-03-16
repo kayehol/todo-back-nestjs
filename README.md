@@ -1,4 +1,4 @@
-## To-do List
+# To-do List
 
 Back-end do Gerenciador de tarefas: crie,edite e remova tarefas.
 
@@ -13,7 +13,7 @@ npm install
 ```
 
 ### Adicione as variáveis de ambiente
-Crie um arquivo .env no diretório raiz do projeto com as informações do arquivo .env.example
+Crie um arquivo `.env` no diretório raiz do projeto com as informações do arquivo `.env.example`
 
 ### Rode as migrations
 Crie as tabelas do banco de dados
@@ -24,12 +24,14 @@ npm run typeorm:migrate
 ### Execute o projeto
 
 ```bash
-$ npm run start
+npm run start
 ```
 
-## Execute os testes
+### Acesse a documentação via swagger
+Acesse em `http://localhost:3000/api`
 
+### Execute os testes
 ```bash
-$ npm run test
+npm run test
 ```
 

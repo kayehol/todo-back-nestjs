@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { ApiOperation } from "@nestjs/swagger";
 import { Task } from "./task.entity";
 import { TaskService } from "./task.service";
 import { CreateTaskDto } from "./dtos/create-task.dto";
 import { UpdateTaskDto } from "./dtos/update-task.dto";
+import { AuthGuard } from "../auth/auth.guard";
 
+@UseGuards(AuthGuard)
 @Controller("api/task")
 export class TaskController {
   constructor(
@@ -30,6 +32,7 @@ export class TaskController {
 
   }
 
+  @ApiOperation({ summary: "Remove uma tarefa existente" })
   @Delete(":id")
   remove(@Param('id') id: number): Promise<void> {
     return this.service.delete(id);
