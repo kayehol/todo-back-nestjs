@@ -6,7 +6,6 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { USER_REPOSITORY } from "../../constants";
 import { AuthService } from "../auth/auth.service";
 import { UserDto } from "./dtos/user.dto";
-import { CreateUserDto } from "./dtos/create-user.dto";
 
 const mockUserRepository = {
   create: jest.fn(),

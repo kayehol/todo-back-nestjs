@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { TASK_REPOSITORY } from "src/constants";
+import { TASK_REPOSITORY } from "../../constants";
 import { Task } from "./task.entity";
 import { Repository } from "typeorm";
 import { CreateTaskDto } from "./dtos/create-task.dto";
