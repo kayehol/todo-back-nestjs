@@ -13,7 +13,7 @@ export class TaskService {
   async findAll(): Promise<Task[]> {
     return this.taskRepository.find({
       relations: {
-        user: true,
+        user: false,
       }
     });
   }

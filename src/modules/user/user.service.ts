@@ -4,6 +4,7 @@ import { User } from "./user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "./dtos/create-user.dto";
 import { AuthService } from "../auth/auth.service";
+import { UserDto } from "./dtos/user.dto";
 
 @Injectable()
 export class UserService {
@@ -32,12 +33,14 @@ export class UserService {
     })
   }
 
-  async create(newUser: CreateUserDto): Promise<User> {
+  async create(newUser: CreateUserDto): Promise<UserDto> {
     newUser.password = await this.authService.hashPass(newUser.password);
 
     const user = this.userRepository.create(newUser);
 
-    return this.userRepository.save(user);
+    const { password, ...result } = await this.userRepository.save(user);
+
+    return result;
   }
 
 }
