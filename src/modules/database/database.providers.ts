@@ -15,7 +15,7 @@ export const databaseProviders = [
           __dirname + '/../**/*.entity{.ts,.js}',
         ],
         migrations: [
-          __dirname + "../migrations/*{.ts,.js}"
+          __dirname + "../../migrations/*{.ts,.js}"
         ],
         synchronize: false,
       });

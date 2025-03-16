@@ -9,7 +9,7 @@ export const AppDataSource = new DataSource({
   password: 'root',
   database: 'test',
   entities: [
-    'src/entities/*.entity{.ts,.js}',
+    'src/modules/**/*.entity{.ts,.js}',
   ],
   migrations: [
     "src/migrations/*{.ts,.js}"
