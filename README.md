@@ -7,10 +7,13 @@ Back-end do Gerenciador de tarefas: crie,edite e remova tarefas.
 ### Requisitos:
 - MySQL
 
-Instale as dependências
+### Instale as dependências
 ```bash
 npm install
 ```
+
+### Adicione as variáveis de ambiente
+Crie um arquivo .env no diretório raiz do projeto com as informações do arquivo .env.example
 
 ### Rode as migrations
 Crie as tabelas do banco de dados
@@ -21,14 +24,12 @@ npm run typeorm:migrate
 ### Execute o projeto
 
 ```bash
-# development
 $ npm run start
 ```
 
 ## Execute os testes
 
 ```bash
-# unit tests
 $ npm run test
 ```
 
