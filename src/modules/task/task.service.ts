@@ -1,7 +1,9 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { TASK_REPOSITORY } from "src/constants";
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { TASK_REPOSITORY } from "../../constants";
 import { Task } from "./task.entity";
 import { Repository } from "typeorm";
+import { CreateTaskDto } from "./dtos/create-task.dto";
+import { UpdateTaskDto } from "./dtos/update-task.dto";
 
 @Injectable()
 export class TaskService {
@@ -11,11 +13,45 @@ export class TaskService {
   ) { }
 
   async findAll(): Promise<Task[]> {
-    return this.taskRepository.find({
-      relations: {
-        user: true,
-      }
+    return await this.taskRepository.find();
+  }
+
+  async findOne(id: number): Promise<Task | null> {
+    const task = await this.taskRepository.findOneBy({
+      id
     });
+
+    if (!task)
+      throw new HttpException("Tarefa inexistente", HttpStatus.NOT_FOUND);
+
+    return task;
+  }
+
+  async create(newTask: CreateTaskDto): Promise<Task> {
+    const task = this.taskRepository.create(newTask);
+
+    return await this.taskRepository.save(task);
+  }
+
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    const task = await this.taskRepository.preload({
+      id,
+      ...updateTaskDto
+    });
+
+    if (!task)
+      throw new HttpException("Tarefa inexistente", HttpStatus.NOT_FOUND);
+
+    return await this.taskRepository.save(task);
+  }
+
+  async delete(id: number): Promise<void> {
+    const task = await this.findOne(id);
+
+    if (!task)
+      throw new HttpException("Tarefa inexistente", HttpStatus.NOT_FOUND);
+
+    await this.taskRepository.remove(task);
   }
 
 }

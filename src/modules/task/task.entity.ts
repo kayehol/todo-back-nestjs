@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from '../user/user.entity';
+import { Exclude } from 'class-transformer';
 
-@Entity()
+@Entity("tasks")
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,9 +16,18 @@ export class Task {
   @Column()
   done: boolean;
 
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP'
+  })
   createdAt: Date;
 
+  @Column({ name: 'user_id' })
+  userId: number;
+
+  @Exclude()
   @ManyToOne(() => User, (user) => user.tasks)
+  @JoinColumn({ name: 'user_id' })
   user: User
 }
