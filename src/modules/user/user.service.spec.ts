@@ -5,6 +5,8 @@ import { User } from "./user.entity";
 import { Test, TestingModule } from "@nestjs/testing";
 import { USER_REPOSITORY } from "../../constants";
 import { AuthService } from "../auth/auth.service";
+import { UserDto } from "./dtos/user.dto";
+import { CreateUserDto } from "./dtos/create-user.dto";
 
 const mockUserRepository = {
   create: jest.fn(),
@@ -52,14 +54,19 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('should create a user', async () => {
-      const createUserDto = { username: 'José da Silva', password: 'senhateste' };
+      const createUserDto = { username: 'jose', password: 'senhateste' };
       const user = new User();
 
       Object.assign(user, createUserDto);
+
+      const expectedUser = new UserDto();
+      Object.assign(user, expectedUser);
+
       jest.spyOn(repository, 'save').mockResolvedValue(user);
 
-      const result = await service.create(createUserDto);
-      expect(result).toEqual(user);
+      const result: UserDto = await service.create(createUserDto);
+
+      expect(result).toEqual(expectedUser);
     });
   });
 })
