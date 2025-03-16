@@ -21,7 +21,7 @@ export class AuthService {
     return hash;
   }
 
-  private verifyPass(user: User, userLogin: RegisterDto): boolean {
+  verifyPass(user: User, userLogin: RegisterDto): boolean {
     return bcrypt.compareSync(userLogin.password, user.password);
   }
 
