@@ -11,6 +11,13 @@ Instale as dependências
 ```bash
 npm install
 ```
+
+### Rode as migrations
+Crie as tabelas do banco de dados
+```bash
+npm run typeorm:migrate
+```
+
 ### Execute o projeto
 
 ```bash
