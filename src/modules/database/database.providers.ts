@@ -18,6 +18,7 @@ export const databaseProviders = [
           __dirname + "../../migrations/*{.ts,.js}"
         ],
         synchronize: false,
+        logging: true
       });
 
       return dataSource.initialize();

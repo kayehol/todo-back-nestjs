@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export const USER_REPOSITORY = 'USER_REPOSITORY';
 export const TASK_REPOSITORY = 'TASK_REPOSITORY';
 export const DATA_SOURCE = 'DATA_SOURCE';

@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   private verifyPass(user: User, userLogin: RegisterDto): boolean {
-    return bcrypt.compareSync(user.password, userLogin.password);
+    return bcrypt.compareSync(userLogin.password, user.password);
   }
 
   async register(user: RegisterDto): Promise<User> {
@@ -46,7 +46,7 @@ export class AuthService {
       throw new HttpException("Credenciais inválidas", HttpStatus.UNAUTHORIZED);
 
     const payload = { sub: user.id, username: user.username };
-    const token = this.jwtService.signAsync(payload);
+    const token = await this.jwtService.signAsync(payload);
 
     return {
       access_token: token,
