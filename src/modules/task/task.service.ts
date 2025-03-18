@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { TASK_REPOSITORY } from "../../constants";
 import { Task } from "./task.entity";
 import { Repository } from "typeorm";
@@ -31,7 +31,7 @@ export class TaskService {
     });
 
     if (!task)
-      throw new HttpException("Tarefa inexistente", HttpStatus.NOT_FOUND);
+      throw new NotFoundException("Tarefa inexistente");
 
     return task;
   }
@@ -49,7 +49,7 @@ export class TaskService {
     });
 
     if (!task)
-      throw new HttpException("Tarefa inexistente", HttpStatus.NOT_FOUND);
+      throw new NotFoundException("Tarefa inexistente");
 
     return await this.taskRepository.save(task);
   }
@@ -58,7 +58,7 @@ export class TaskService {
     const task = await this.findOne(id);
 
     if (!task)
-      throw new HttpException("Tarefa inexistente", HttpStatus.NOT_FOUND);
+      throw new NotFoundException("Tarefa inexistente");
 
     await this.taskRepository.remove(task);
   }

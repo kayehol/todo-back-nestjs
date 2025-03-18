@@ -4,7 +4,7 @@ import { User } from "../user/user.entity";
 import { JwtService } from "@nestjs/jwt";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dtos/login.dto";
-import { HttpException, HttpStatus } from "@nestjs/common";
+import { HttpException, HttpStatus, UnauthorizedException } from "@nestjs/common";
 
 const mockUserService = {
   findOne: jest.fn(),
@@ -53,7 +53,7 @@ describe('AuthService', () => {
         await authService.login(userLogin);
       } catch (error) {
         expect(error instanceof HttpException).toBe(true);
-        expect(error.response).toBe("Credenciais inválidas");
+        expect(error.message).toBe("Credenciais inválidas");
         expect(error.status).toBe(HttpStatus.UNAUTHORIZED);
       }
     });

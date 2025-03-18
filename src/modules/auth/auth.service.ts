@@ -1,4 +1,4 @@
-import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { BadRequestException, forwardRef, HttpException, HttpStatus, Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { RegisterDto } from "./dtos/register.dto";
@@ -30,7 +30,7 @@ export class AuthService {
     const userExists = await this.userService.userExists(user.username);
 
     if (userExists)
-      throw new HttpException("Credenciais inválidas", HttpStatus.BAD_REQUEST);
+      throw new BadRequestException("Credenciais inválidas");
 
     return await this.userService.create(user);
   }
@@ -39,12 +39,12 @@ export class AuthService {
     const user = await this.userService.findOne(userLogin.username);
 
     if (!user)
-      throw new HttpException("Credenciais inválidas", HttpStatus.UNAUTHORIZED);
+      throw new UnauthorizedException("Credenciais inválidas");
 
     const verified = this.verifyPass(user, userLogin);
 
     if (!verified)
-      throw new HttpException("Credenciais inválidas", HttpStatus.UNAUTHORIZED);
+      throw new UnauthorizedException("Credenciais inválidas");
 
     const payload = { sub: user.id, username: user.username };
     const token = await this.jwtService.signAsync(payload);
