@@ -5,32 +5,39 @@ Back-end do Gerenciador de tarefas: crie,edite e remova tarefas.
 ## Como executar
 
 ### Requisitos:
-- MySQL
+- MySQL 8.4.4
 
-### Instale as dependências
+- Download do MySQL Community [https://dev.mysql.com/downloads/]
+
+- Criar um banco de dados de nome `test`
+```mysql
+CREATE DATABASE test;
+```
+
+### 1. Instale as dependências
 ```bash
 npm install
 ```
 
-### Adicione as variáveis de ambiente
+### 2. Adicione as variáveis de ambiente
 Crie um arquivo `.env` no diretório raiz do projeto com as informações do arquivo `.env.example`
 
-### Rode as migrations
+### 3. Rode as migrations
 Crie as tabelas do banco de dados
 ```bash
 npm run typeorm:migrate
 ```
 
-### Execute o projeto
+### 4. Execute o projeto
 
 ```bash
 npm run start
 ```
 
-### Acesse a documentação via swagger
+### 5. Acesse a documentação via swagger
 Acesse em `http://localhost:3000/api`
 
-### Execute os testes
+### 6. Execute os testes
 ```bash
 npm run test
 ```
