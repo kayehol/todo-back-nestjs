@@ -5,8 +5,8 @@ Back-end do Gerenciador de tarefas: crie,edite e remova tarefas.
 ## Como executar
 
 ### Requisitos:
-- MySQL 8.4.4
-- Node v23
+- MySQL: 8.4.4
+- Node: v23 (recomendado)
 
 - Download do MySQL Community [https://dev.mysql.com/downloads/]
 
